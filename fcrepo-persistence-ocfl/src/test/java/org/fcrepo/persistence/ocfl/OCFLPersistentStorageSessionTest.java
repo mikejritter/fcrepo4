@@ -74,7 +74,6 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class OCFLPersistentStorageSessionTest {
 
-
     private static final String OCFL_OBJECT_ID = "ocfl-object-id";
 
     private OCFLPersistentStorageSession session;
@@ -253,7 +252,7 @@ public class OCFLPersistentStorageSessionTest {
         try {
             session.persist(rdfSourceOperation);
             fail("second session.persist(...) invocation should have failed.");
-        } catch (PersistentStorageException ex) {
+        } catch (final PersistentStorageException ex) {
             //expected failure
         }
     }
@@ -273,7 +272,7 @@ public class OCFLPersistentStorageSessionTest {
         try {
             session.getTriples(resourceId, null);
             fail("second session.getTriples(...) invocation should have failed.");
-        } catch (PersistentStorageException ex) {
+        } catch (final PersistentStorageException ex) {
             //expected failure
         }
     }
@@ -293,7 +292,7 @@ public class OCFLPersistentStorageSessionTest {
         try {
             session.commit();
             fail("second session.commit(...) invocation should have failed.");
-        } catch (PersistentStorageException ex) {
+        } catch (final PersistentStorageException ex) {
             //expected failure
         }
     }
@@ -316,7 +315,7 @@ public class OCFLPersistentStorageSessionTest {
         try {
             session.getTriples(resourceId, null);
             fail("session.getTriples(...) invocation after rollback should have failed.");
-        } catch (PersistentStorageException ex) {
+        } catch (final PersistentStorageException ex) {
             //expected failure
         }
     }
@@ -350,7 +349,7 @@ public class OCFLPersistentStorageSessionTest {
             //perform the create rdf operations
             session1.persist(rdfSourceOperation);
             session1.persist(rdfSourceOperation2);
-        } catch (PersistentStorageException e) {
+        } catch (final PersistentStorageException e) {
             fail("Operations should not fail.");
         }
 
@@ -359,7 +358,7 @@ public class OCFLPersistentStorageSessionTest {
         try {
             session1.commit();
             fail("session1.commit(...) invocation should fail.");
-        } catch (PersistentStorageException ex) {
+        } catch (final PersistentStorageException ex) {
             //attempted rollback should also fail:
             session1.rollback();
             fail("session1.rollback(...) invocation should fail.");
@@ -388,7 +387,7 @@ public class OCFLPersistentStorageSessionTest {
         //persist the operation
         try {
             session1.persist(rdfSourceOperation);
-        } catch (PersistentStorageException e) {
+        } catch (final PersistentStorageException e) {
             fail("Operation should not fail.");
         }
 
@@ -396,7 +395,7 @@ public class OCFLPersistentStorageSessionTest {
         new Thread(() -> {
             try {
                 session1.commit();
-            } catch (PersistentStorageException e) {
+            } catch (final PersistentStorageException e) {
                 fail("The commit() should not fail.");
             } finally {
                 latch.countDown();
@@ -410,7 +409,7 @@ public class OCFLPersistentStorageSessionTest {
         try {
             session1.getTriples(resourceId, null);
             fail("session1.getTriples(...) invocation should have failed.");
-        } catch (PersistentStorageException e){
+        } catch (final PersistentStorageException e){
             //do nothing
         }
 
@@ -435,14 +434,14 @@ public class OCFLPersistentStorageSessionTest {
         //persist the operation
         try {
             session1.persist(rdfSourceOperation);
-        } catch (PersistentStorageException e) {
+        } catch (final PersistentStorageException e) {
             fail("Operation should not fail.");
         }
 
         try {
             session1.commit();
             fail("Operation should have failed.");
-        } catch (PersistentStorageException e) {
+        } catch (final PersistentStorageException e) {
             //do nothing
         }
 
@@ -462,7 +461,7 @@ public class OCFLPersistentStorageSessionTest {
         try {
             session1.persist(rdfSourceOperation);
             session1.commit();
-        } catch (PersistentStorageException e) {
+        } catch (final PersistentStorageException e) {
             fail("Operation should not fail.");
         }
 
@@ -479,7 +478,7 @@ public class OCFLPersistentStorageSessionTest {
         try {
             session1.persist(rdfSourceOperation);
             session1.rollback();
-        }catch(PersistentStorageException e) {
+        }catch(final PersistentStorageException e) {
             fail("Neither persist() nor rollback() should have failed.");
 
         }
@@ -499,20 +498,20 @@ public class OCFLPersistentStorageSessionTest {
         final PersistentStorageSession session1 = createSession(index, mockSessionFactory);
         try {
             session1.persist(rdfSourceOperation);
-        } catch (PersistentStorageException e) {
+        } catch (final PersistentStorageException e) {
             fail("Operation should not fail.");
         }
 
         try {
             session1.commit();
             fail("Operation should fail.");
-        } catch (PersistentStorageException e) {
+        } catch (final PersistentStorageException e) {
             //expected failure
         }
 
         try {
             session1.rollback();
-        } catch (PersistentStorageException e) {
+        } catch (final PersistentStorageException e) {
             fail("Operation should not fail.");
         }
 
